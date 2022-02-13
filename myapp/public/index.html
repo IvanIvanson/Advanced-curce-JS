@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">  
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app">
+      <div id="container">
+        <header>
+            <div class="navbar navbar-default">
+                <h1>{{sitename}}</h1>
+                </div>
+                <div class="nav navbar-nav navbar-left cart">
+               
+ <button class="btn btn-default btn-lg" v-on:click="showCheckout">      
+     <span class="glyphicon glyphicon-shopping-cart"> {{cartItemCount}}</span></button>   
+               
+            </div>
+        </header>
+       
+        <main>
+            <div class="row product">
+                <div class="col">
+                    <figure>
+                        <img v-bind:src="product.image">
+                    </figure>
+                </div>
+                <div class="col col-expand">
+                    <h1>{{product.title}}</h1>
+                    <p v-html="product.description"></p>
+                    <p class="price">
+                        {{product.price}}
+                    </p>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-lg" v-on:click="addToCart" v-show="canAddToCart" v-if="canAddToCart">Add to cart</button>
+            <button disabled="true" class="btn btn-primary btn-lg" v-else>Add to cart</button>
+            <span class="inventory-message" v-if="product.availableIventory-cartItemCount === 0">Товар закончился!</span>
+            <span class="inventory-message" v-else-if="product.availableIventory-cartItemCount<5">Осталось {{product.availableIventory - cartItemCount}} в наличии!</span>
+        </main>
+    </div>
+     
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+     
+      <script>
+          let webstore = new Vue({
+              el: '#app',
+              data: {
+                 sitename: "Vue.js shop",
+                 showProduct: true,
+                
+                 product: {
+                     id:1,
+                     title: "product_1",
+                     discription: "something product",
+                     price: `5000 руб.`,
+                     image: "https://placeimg.com/1000/1000/animals",
+                     availableIventory: 5
+                 },
+                 cart: []
+              },
+              methods: {
+                  addToCart: function() {
+                      this.cart.push( this.product.id );
+                  },
+                  showCheckout() {
+                      this.showProduct = this.showProduct ? false : true;
+                  }
+              },
+              computed: {
+                  cartItemCount: function() {
+                      return this.cart.length || '';
+                  },
+                  canAddToCart: function() {
+                      return this.product.availableIventory > this.cartItemCount;
+                  }
+              }
+          })
+      </script>
+    </div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
