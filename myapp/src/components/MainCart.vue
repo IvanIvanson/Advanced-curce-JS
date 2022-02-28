@@ -1,5 +1,6 @@
 <template>
-   <main class="main">
+<div class="wrapper">
+ <main class="main">
 <!-- Breadcrumb -->
 <nav class="breadcrumb">
     <div class="breadcrumb__content">
@@ -52,7 +53,7 @@
             <h4>MANGO  PEOPLE  T-SHIRT</h4>
          
             <ul>
-                <li>Price: <span>300$</span> </li>
+                <li>Price: <span>$300</span> </li>
                 <li>Color: Red</li>
                 <li>Size: Xl	</li>
                 <li>Quantity:<input type="number"></li>
@@ -95,26 +96,33 @@
 
 
     <!--  -->
+
+
+ 
+
+
+
 </main>
+</div>
 </template>
 
 <script>
 export default {
-  name: 'Home',
-  props: [
-    'data'
-  ]
-  
+  name: 'MainCart',
+  props: {
+    // msg: String
+  }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&family=Lato:wght@100;300;400;700;900&family=Mulish:wght@200&family=Playfair+Display&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300&display=swap");
 
 $max-width:1140px;  
 $gap: 30px;
 $main-font: 14px;
+$widthContent: 1144px;
+$pink: pink;
 
 @mixin reset() {
     margin: 0;
@@ -135,13 +143,13 @@ $main-font: 14px;
     @include reset;
     }
 
+
+   
+
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    // @import 'module/header';
-
-
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 .main {
     flex-grow: 1;
     width: 100%;
@@ -149,7 +157,7 @@ $main-font: 14px;
         width: 100%;
         background: #f8f3f4;
         .breadcrumb__content {
-            max-width: 1140px;
+            max-width: $widthContent;
             display: flex;
             justify-content: space-between;
             margin: 0 auto;
@@ -161,13 +169,13 @@ $main-font: 14px;
                 font-weight: normal;
                 font-size: 24px;
                 line-height: 29px;
-                color: pink;
+                color: $pink;
             }
         }
     }
     // cards-conteiner
 .cards-conteiner {
-    max-width: 1140px;
+    max-width: $widthContent;
     margin: 96px auto 128px auto;
     // border: solid red 2px;
     display: flex;
@@ -401,9 +409,9 @@ margin-bottom: 42px;
 
 }
 
-
-// @import 'module/footer';
 }
 
-// @import 'module/cart-media-queries';
+
+
+
 </style>
